@@ -34,7 +34,7 @@ namespace Sales.API.Controllers
             {
                 if (dbUpdateException.InnerException!.Message.Contains("duplicate"))
                 {
-                    return BadRequest("Ya existe una categoría con el mismo nombre");
+                    return BadRequest("Ya existe una categoria con el mismo nombre");
                 }
                 else
                 {
