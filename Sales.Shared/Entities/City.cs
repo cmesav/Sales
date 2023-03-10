@@ -12,7 +12,7 @@ namespace Sales.Shared.Entities
         public string Name { get; set; } = null!;
 
         public int StateId { get; set; }
-
         public State? State { get; set; }
+        
     }
 }

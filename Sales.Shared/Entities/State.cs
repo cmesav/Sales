@@ -10,13 +10,12 @@ namespace Sales.Shared.Entities
         [Required(ErrorMessage = "El campo {0} es obligatorio.")]
         [MaxLength(100, ErrorMessage = "El campo {0} no puede ser mayor a {1} caracteres.")]
         public string Name { get; set; } = null!;
-
         public int CountryId { get; set; }
-
         public Country? Country { get; set; }
         public ICollection<City>? Cities { get; set; }
 
-        [Display(Name = "Ciudades")]
+        //[Display(Name = "Ciudades")]
         public int CitiesNumber => Cities == null ? 0 : Cities.Count;
+        
     }
 }
