@@ -10,5 +10,9 @@ namespace Sales.Shared.Entities
         [MaxLength(100, ErrorMessage = "El campo {0} debe tener máximo {1}")]
         [Required(ErrorMessage = "El campo {0} es obligatorio")]
         public string Name { get; set; } = null!;
+
+        public ICollection<SubCategory>? SubCategories { get; set; }
+
+        public int SubCategoryNumber => SubCategories == null ? 0 : SubCategories.Count;
     }
 }
