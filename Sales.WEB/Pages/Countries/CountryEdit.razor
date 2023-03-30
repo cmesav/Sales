@@ -8,11 +8,11 @@
 
 @if (country is null)
 {
-        <p>Cargando...</p>
+    <div class="spinner" />
 }
 else
 {
-        <CountryForm @ref="countryForm" Country="country" OnValidSubmit="EditAsync" ReturnAction="Return" />
+    <CountryForm @ref="countryForm" Country="country" OnValidSubmit="EditAsync" ReturnAction="Return" />
 }
 
 
@@ -46,7 +46,7 @@ else
         }
     }
 
-     private async Task EditAsync()
+    private async Task EditAsync()
     {
         var responseHTTP = await repository.Put("api/countries", country);
 
