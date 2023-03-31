@@ -85,6 +85,16 @@ namespace Sales.API.Helpers
             return await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
         }
 
+        public async Task<string> GenerateEmailConfirmationTokenAsync(User user)
+        {
+            return await _userManager.GenerateEmailConfirmationTokenAsync(user);
+        }
+
+        public async Task<IdentityResult> ConfirmEmailAsync(User user, string token)
+        {
+            return await _userManager.ConfirmEmailAsync(user, token);
+        }
+
         public async Task LogoutAsync()
         {
             await _signInManager.SignOutAsync();

@@ -8,6 +8,7 @@
         Task<HttpResponseWrapper<Object>> Delete(string url);
         Task<HttpResponseWrapper<Object>> Put<T>(string url, T model);
         Task<HttpResponseWrapper<TResponse>> Put<T, TResponse>(string url, T model);
+        Task<HttpResponseWrapper<object>> Get(string url);
     }
 
 }

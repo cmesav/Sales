@@ -23,6 +23,10 @@ namespace Sales.API.Helpers
         Task<bool> IsUserInRoleAsync(User user, string roleName);
 
         Task<SignInResult> LoginAsync(LoginDTO model);
+        Task<string> GenerateEmailConfirmationTokenAsync(User user);
+
+        Task<IdentityResult> ConfirmEmailAsync(User user, string token);
+
 
         Task LogoutAsync();
 
