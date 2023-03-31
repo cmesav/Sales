@@ -89,7 +89,6 @@ namespace Sales.WEB.Repositories
             var responseHTTP = await _httpClient.GetAsync(url);
             return new HttpResponseWrapper<object>(null, !responseHTTP.IsSuccessStatusCode, responseHTTP);
         }
-
     }
 
 }
