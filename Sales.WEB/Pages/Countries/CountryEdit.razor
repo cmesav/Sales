@@ -20,6 +20,9 @@ else
     private Country? country;
     private CountryForm? countryForm;
 
+    [CascadingParameter]
+    BlazoredModalInstance BlazoredModal { get; set; } = default!;
+
     [Parameter]
     public int Id { get; set; }
 
@@ -52,14 +55,21 @@ else
 
         if (responseHTTP.Error)
         {
-            var mensajeError = await responseHTTP.GetErrorMessageAsync();
-            await sweetAlertService.FireAsync("Error", mensajeError, SweetAlertIcon.Error);
+            //var mensajeError = await responseHTTP.GetErrorMessageAsync();
+            //await sweetAlertService.FireAsync("Error", mensajeError, SweetAlertIcon.Error);
+            var message = await responseHTTP.GetErrorMessageAsync();
+            await sweetAlertService.FireAsync("Error", message, SweetAlertIcon.Error);
+            return;
+
         }
-        else
-        {
-            countryForm!.FormPostedSuccessfully = true;
-            navigationManager.NavigateTo("/countries");
-        }
+        //else
+        //{
+        //    //countryForm!.FormPostedSuccessfully = true;
+        //    //navigationManager.NavigateTo("/countries");
+
+        //}
+        await BlazoredModal.CloseAsync(ModalResult.Ok());
+        Return();
     }
 
     private void Return()

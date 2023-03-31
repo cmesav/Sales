@@ -15,7 +15,8 @@ else
         <div class="card-header">
             <span>
                 <i class="oi oi-globe"></i> Países
-                <a class="btn btn-sm btn-primary float-end" href="/countries/create"><i class="oi oi-plus"></i> Adicionar País</a>
+                @*<a class="btn btn-sm btn-primary float-end" href="/countries/create"><i class="oi oi-plus"></i> Adicionar País</a>*@
+                <a class="btn btn-sm btn-primary float-end" @onclick=@(() => ShowModal())><i class="oi oi-plus"></i> Adicionar País</a>
             </span>
         </div>
         <div class="card-body">
@@ -75,6 +76,9 @@ else
     private int totalPages;
 
     public List<Country>? Countries { get; set; }
+
+    [CascadingParameter]
+    IModalService Modal { get; set; } = default!;
 
     [Parameter]
     [SupplyParameterFromQuery]
@@ -185,6 +189,26 @@ else
         int page = 1;
         await LoadAsync(page);
         await SelectedPage(page);
+    }
+
+    private async Task ShowModal(int id = 0, bool isEdit = false)
+    {
+        IModalReference modalReference;
+
+        if (isEdit)
+        {
+            modalReference = Modal.Show<CountryEdit>(string.Empty, new ModalParameters().Add("CountryId", id));
+        }
+        else
+        {
+            modalReference = Modal.Show<CountryCreate>();
+        }
+
+        var result = await modalReference.Result;
+        if (result.Confirmed)
+        {
+            await LoadAsync();
+        }
     }
 
 }

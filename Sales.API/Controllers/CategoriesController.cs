@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Sales.API.Data;
 using Sales.API.Helpers;
@@ -8,6 +10,7 @@ using Sales.Shared.Entities;
 namespace Sales.API.Controllers
 {
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/categories")]
     public class CategoriesController : ControllerBase
     {
@@ -31,11 +34,9 @@ namespace Sales.API.Controllers
 
 
             return Ok(await queryable
-        .OrderBy(x => x.Name)
-        .Paginate(pagination)
-        .ToListAsync());
-
-            //            return Ok(await _context.Categories.ToListAsync());
+            .OrderBy(x => x.Name)
+            .Paginate(pagination)
+            .ToListAsync());
         }
 
         [HttpGet("totalPages")]
@@ -52,6 +53,7 @@ namespace Sales.API.Controllers
             double totalPages = Math.Ceiling(count / pagination.RecordsNumber);
             return Ok(totalPages);
         }
+
         [HttpGet("full")]
         public async Task<ActionResult> GetFullAsync()
         {
