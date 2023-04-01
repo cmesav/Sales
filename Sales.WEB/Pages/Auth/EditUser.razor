@@ -230,18 +230,11 @@ else
         navigationManager.NavigateTo("/");
     }
 
-    private async Task ShowModal(/*int id = 0, bool isEdit = false*/)
+    private async Task ShowModal()
     {
         IModalReference modalReference;
 
-        //if (isEdit)
-        //{
-        //    modalReference = Modal.Show<CountryEdit>(string.Empty, new ModalParameters().Add("Id", id));
-        //}
-        //else
-        //{
-            modalReference = Modal.Show<ChangePassword>();
-        //}
+        modalReference = Modal.Show<ChangePassword>();
 
         var result = await modalReference.Result;
         if (result.Confirmed)
