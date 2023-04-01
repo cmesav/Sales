@@ -19,6 +19,9 @@ else
     private City? city;
     private CityForm? cityForm;
 
+    [CascadingParameter]
+    BlazoredModalInstance BlazoredModal { get; set; } = default!;
+
     [Parameter]
     public int cityId { get; set; }
 
@@ -54,8 +57,10 @@ else
         {
             var mensajeError = await responseHTTP.GetErrorMessageAsync();
             await sweetAlertService.FireAsync("Error", mensajeError, SweetAlertIcon.Error);
+            return;
         }
 
+        await BlazoredModal.CloseAsync(ModalResult.Ok());
         Return();
     }
 

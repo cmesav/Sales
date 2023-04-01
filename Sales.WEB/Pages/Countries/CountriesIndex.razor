@@ -197,7 +197,7 @@ else
 
         if (isEdit)
         {
-            modalReference = Modal.Show<CountryEdit>(string.Empty, new ModalParameters().Add("Id", id));
+            modalReference = Modal.Show<CountryEdit>(string.Empty, new ModalParameters().Add("Id", id)); //el primer parametro debe llamarse igual al parametro que se recibe en la clase CountryEdit
         }
         else
         {
