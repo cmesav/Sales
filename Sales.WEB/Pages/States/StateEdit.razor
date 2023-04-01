@@ -19,6 +19,9 @@ else
     private State? state;
     private StateForm? stateForm;
 
+    [CascadingParameter]
+    BlazoredModalInstance BlazoredModal { get; set; } = default!;
+
     [Parameter]
     public int stateId { get; set; }
 
@@ -53,8 +56,10 @@ else
         {
             var mensajeError = await responseHTTP.GetErrorMessageAsync();
             await sweetAlertService.FireAsync("Error", mensajeError, SweetAlertIcon.Error);
+            return;
         }
 
+        await BlazoredModal.CloseAsync(ModalResult.Ok());
         Return();
     }
 
